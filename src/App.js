@@ -1,24 +1,33 @@
-import logo from './logo.svg';
-import './App.css';
-
+import { Route, Routes } from 'react-router-dom';
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import RoleSelectionPage from './pages/roleSelection/RoleSelectionPage';
+import StudentLogin from './pages/student/login/Login';
+import StudentRegister from './pages/student/register/Register';
+import TeacherLogin from './pages/teacher/login/Login';
+import TeacherRegister from './pages/teacher/register/Register';
+import HomePage from './pages/home/HomePage';
+import ContentPage from './pages/home/contentPage/ContentPage';
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <Routes>
+        <Route path="/" element={<RoleSelectionPage />} />
+        <Route path='/home'>
+          <Route index={true} element={<HomePage />}/>
+        <Route path="content/:contentName" element={<ContentPage />} />
+        </Route>
+        <Route path="/student">
+          <Route path="login" element={<StudentLogin />} />
+          <Route path="register" element={<StudentRegister />} />
+        </Route>
+        <Route path="/teacher">
+          <Route path="login" element={<TeacherLogin />} />
+          <Route path="register" element={<TeacherRegister />} />
+        </Route>
+      </Routes>
+      <ToastContainer />
+    </>
   );
 }
 
